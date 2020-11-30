@@ -3,7 +3,6 @@ import json
 import os
 import pickle
 import sys
-# import sagemaker_containers
 import pandas as pd
 import torch
 import torch.optim as optim
@@ -66,9 +65,6 @@ def train(model, train_loader, epochs, optimizer, loss_fn, device):
     loss_fn      - The loss function used for training.
     device       - Where the model and data should be loaded (gpu or cpu).
     """
-    
-    # TODO: Paste the train() method developed in the notebook here.
-
     for epoch in range(1, epochs + 1):
         model.train()
         total_loss = 0
@@ -78,7 +74,6 @@ def train(model, train_loader, epochs, optimizer, loss_fn, device):
             batch_X = batch_X.to(device)
             batch_y = batch_y.to(device)
             
-            # TODO: Complete this train method to train the model provided.
             optimizer.zero_grad()
             output = model.forward(batch_X)
             loss = loss_fn(output, batch_y)
@@ -117,11 +112,8 @@ if __name__ == '__main__':
                         help='size of the vocabulary (default: 5000)')
 
     # Maker Parameters
-    # parser.add_argument('--hosts', type=list, default=json.loads(os.environ['SM_HOSTS']))
-    # parser.add_argument('--current-host', type=str, default=os.environ['SM_CURRENT_HOST'])
     parser.add_argument('--model-dir', type=str, default=model_dir)
     parser.add_argument('--data-dir', type=str, default=data_dir)
-    # parser.add_argument('--num-gpus', type=int, default=os.environ['SM_NUM_GPUS'])
 
     args = parser.parse_args()
 
